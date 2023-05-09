@@ -2,7 +2,7 @@ from math import sqrt, log
 from copy import deepcopy
 from queue import Queue
 from random import choice
-from time import clock
+from time import process_time
 from meta import GameMeta, MCTSMeta
 from gamestate import GameState
 
@@ -92,17 +92,17 @@ class UctMctsAgent:
         specified amount of time in seconds.
 
         """
-        start_time = clock()
+        start_time = process_time()
         num_rollouts = 0
 
         # do until we exceed our time budget
-        while clock() - start_time < time_budget:
+        while process_time() - start_time < time_budget:
             node, state = self.select_node()
             turn = state.turn()
             outcome = self.roll_out(state)
             self.backup(node, turn, outcome)
             num_rollouts += 1
-        run_time = clock() - start_time
+        run_time = process_time() - start_time
         node_count = self.tree_size()
         self.run_time = run_time
         self.node_count = node_count

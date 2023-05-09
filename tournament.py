@@ -15,7 +15,7 @@ def tournament(interface1, interface2, game_number=100, movetime=10, size=8, ope
     each time. Return the winrate for the first of the two agents. Print games
     played along the way.
     """
-    begin = time.clock()
+    begin = time.process_time()
     p1_score = 0  # score for player 1
     p2_score = 0  # score for player 2
     interface1.gtp_time([movetime])
@@ -106,5 +106,5 @@ def tournament(interface1, interface2, game_number=100, movetime=10, size=8, ope
     print('player 1 wins = ', p1, ' %')
     print('player 2 wins = ', p2, ' %')
     print("Average Simulations = [ %a ] " % (rollouts_1 / genmove_calls_1))
-    print('Finished in %i seconds' % (time.clock() - begin))
-    return p1_score, p2_score, rollouts_info, time.clock() - begin
+    print('Finished in %i seconds' % (time.process_time() - begin))
+    return p1_score, p2_score, rollouts_info, time.process_time() - begin
